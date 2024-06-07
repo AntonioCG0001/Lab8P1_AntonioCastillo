@@ -20,16 +20,17 @@ public class Paginacion {
 
     public Paginacion(int frames,ArrayList<Character>array) {
        this.frames = frames;
-       this.paginas=array;        
+       this.paginas=array; 
+       
     }
     
-    public void FIFO(int frames,ArrayList<Character>array){
+    public void FIFO(){
         int validar=0;
-        char holder1=array.get(0);
+        char holder1=paginas.get(0);
         RAM.add(holder1);
         cache_miss=cache_miss+1;
-        for (int x=1;x<array.size();x++){
-            char holder=array.get(x);
+        for (int x=1;x<paginas.size();x++){
+            char holder=paginas.get(x);
             for (int y=0;y<RAM.size();y++){
                 if (holder==RAM.get(y)){
                     validar=1;
@@ -37,36 +38,72 @@ public class Paginacion {
             }
             if (validar==1){
                 System.out.println("Acceso a página tal");
-                RAM.add(holder);
-                cache_miss++;
+                
+                cache_hit++;
             }
             else{
-                
+                if (cache_miss>frames){
+                    char holder3=RAM.get(0);
+                    disco.add(holder3);
+                    RAM.set(0,holder);
+                    cache_miss++;
+                }
+                else{
+                    RAM.add(holder);
+                    cache_miss++;
+                }
             }
             validar=0;
         }
     }
-    public void OPT(int frames,ArrayList<Character>array){
-        for (int x=0;x<frames;x++){
-            
-            
-        }
+    public void OPT(){
+        int validar=0;
+        char holder1=paginas.get(0);
+        RAM.add(holder1);
+        cache_miss=cache_miss+1;
+        for (int x=1;x<paginas.size();x++){
+            char holder=paginas.get(x);
+            for (int y=0;y<RAM.size();y++){
+                if (holder==RAM.get(y)){
+                    validar=1;
+                }
+            }
+            if (validar==1){
+                System.out.println("Acceso a página tal");
+                
+                cache_hit++;
+            }
+            else{
+                if (cache_miss>frames){
+                    char holder3=RAM.get(0);
+                    disco.add(holder3);
+                    RAM.set(0,holder);
+                    cache_miss++;
+                }
+                else{
+                    RAM.add(holder);
+                    cache_miss++;
+                }
+            }
+            validar=0;
+        }   
+        
     }
 
     public int getCache_miss() {
         return cache_miss;
     }
 
-    public void setCache_miss(int cache_miss1) {
-        this.cache_miss = cache_miss1;
+    public void setCache_miss(int cache_miss) {
+        this.cache_miss = cache_miss;
     }
 
     public int getCache_hit() {
         return cache_hit;
     }
 
-    public void setCache_hit(int cache_hit1) {
-        this.cache_hit = cache_hit1;
+    public void setCache_hit(int cache_hit) {
+        this.cache_hit = cache_hit;
     }
 
     public int getFrames() {

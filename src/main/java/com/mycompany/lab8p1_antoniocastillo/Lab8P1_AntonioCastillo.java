@@ -15,10 +15,8 @@ import java.util.Random;
 public class Lab8P1_AntonioCastillo {
     static int frames=0;
     static ArrayList<Character> pagina = new ArrayList();
-    static ArrayList paginas = new ArrayList<Paginacion>();
+    static ArrayList <Paginacion> paginas = new ArrayList<Paginacion>();
     public static void main(String[] args) {
-        
-        
         int lab=0;
         while (lab==0){
             Scanner scanner = new Scanner(System.in);
@@ -29,9 +27,10 @@ public class Lab8P1_AntonioCastillo {
                     generarArray();
                     break;
                 case 1:
-                                     
+                    fifo();                 
                     break;
                 case 2:
+                    opt();
                     break;
                 case 3:
                     break;
@@ -62,8 +61,17 @@ public class Lab8P1_AntonioCastillo {
         }
         
     }
+    public static void fifo(){
+           Paginacion p =paginas.get(0);
+           p.FIFO();
+    }
+    public static void opt(){
+           Paginacion p =paginas.get(1);
+           p.OPT();
+    }
+        
     public static ArrayList<Paginacion>paginacion(){
-        paginas=Paginacion(frames,pagina);
+        paginas.add(new Paginacion(frames,pagina));
         return paginas;
     }
     public static ArrayList<Character> getPagina() {
