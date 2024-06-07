@@ -21,7 +21,6 @@ public class Paginacion {
     public Paginacion(int frames,ArrayList<Character>array) {
        this.frames = frames;
        this.paginas=array;
-       toString();
        
     }
     
@@ -29,27 +28,38 @@ public class Paginacion {
         int validar=0;
         char holder1=paginas.get(0);
         RAM.add(holder1);
+        System.out.println("Pagina "+holder1+" llega");
+        System.out.println(RAM);
         cache_miss=cache_miss+1;
         for (int x=1;x<paginas.size();x++){
             char holder=paginas.get(x);
-            for (int y=0;y<RAM.size();y++){
+            for (int y=1;y<RAM.size();y++){
                 if (holder==RAM.get(y)){
                     validar=1;
                 }
             }
             if (validar==1){
+                System.out.println("Pagina "+holder+" llega");
+                System.out.println(RAM);
                 System.out.println("Acceso a página tal");
                 
                 cache_hit++;
             }
             else{
                 if (cache_miss>frames){
+                    System.out.println("Pagina "+holder+" llega");
+                    System.out.println(RAM);
                     char holder3=RAM.get(0);
+                    System.out.println("Pagina "+holder3+" sale de ram y llega a disco");
                     disco.add(holder3);
-                    RAM.set(0,holder);
+                    RAM.add(holder);
+                    RAM.remove(0);
+                    System.out.println(RAM);
                     cache_miss++;
                 }
                 else{
+                    System.out.println("Pagina "+holder+" llega");
+                    System.out.println(RAM);
                     RAM.add(holder);
                     cache_miss++;
                 }
@@ -88,12 +98,18 @@ public class Paginacion {
             }
             else{
                 if (cache_miss>frames){
+                    System.out.println("Pagina "+holder+" llega");
+                    System.out.println(RAM);
                     char holder3=RAM.get(0);
+                    System.out.println("Pagina "+holder3+" sale de ram y llega a disco");
                     disco.add(holder3);
-                    RAM.set(0,holder);
+                    RAM.add(holder);
+                    RAM.remove(0);
+                    System.out.println(RAM);
                     cache_miss++;
                 }
                 else{
+                    System.out.println("Pagina "+holder+" llega");
                     RAM.add(holder);
                     cache_miss++;
                 }

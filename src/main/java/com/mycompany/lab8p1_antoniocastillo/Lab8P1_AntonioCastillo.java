@@ -74,6 +74,7 @@ public class Lab8P1_AntonioCastillo {
             pagina.add(newChar);
         }
         System.out.println("Arraylist Generado");
+        System.out.println(pagina);
         paginas.add(new Paginacion(frames,pagina));
         
     }
