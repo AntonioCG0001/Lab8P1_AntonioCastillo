@@ -12,6 +12,9 @@ import java.util.Random;
  *
  * @author ac
  */
+////
+//// Los commits 2 y 3 estuvieron tardes porque me estaban ayudando cuando dio la hora de hacer el push
+////
 public class Lab8P1_AntonioCastillo {
     static int frames=0;
     static ArrayList<Character> pagina = new ArrayList();
@@ -33,6 +36,7 @@ public class Lab8P1_AntonioCastillo {
                     opt();
                     break;
                 case 3:
+                    comparar();
                     break;
                 case 4:
                     lab=1;
@@ -42,11 +46,21 @@ public class Lab8P1_AntonioCastillo {
         }//Fin While
 
     }// Main
+        public static void comparar(){
+            int missFIFO=paginas.get(0).getCache_miss();
+            int missOPT=paginas.get(0).getCache_miss();
+            if (missFIFO<missOPT){
+                System.out.println("Fifo es mas eficiente");
+            }
+            else{
+                System.out.println("OPT es mas eficiente");
+            }
+        }
         public static void generarArray(){
         Random ran = new Random();
         Scanner scanner = new Scanner(System.in);
         int tamano=0;
-        while (tamano==0){
+        while (tamano<8){
             System.out.println("Ingrese el tamaño del arraylist (Mayor o igual a 8)");
             tamano=scanner.nextInt();
         }
@@ -59,6 +73,8 @@ public class Lab8P1_AntonioCastillo {
             char newChar= (char)(holder);
             pagina.add(newChar);
         }
+        System.out.println("Arraylist Generado");
+        paginas.add(new Paginacion(frames,pagina));
         
     }
     public static void fifo(){
@@ -66,7 +82,7 @@ public class Lab8P1_AntonioCastillo {
            p.FIFO();
     }
     public static void opt(){
-           Paginacion p =paginas.get(1);
+           Paginacion p =paginas.get(0);
            p.OPT();
     }
         

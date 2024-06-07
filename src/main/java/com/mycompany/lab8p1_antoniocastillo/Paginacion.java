@@ -20,7 +20,8 @@ public class Paginacion {
 
     public Paginacion(int frames,ArrayList<Character>array) {
        this.frames = frames;
-       this.paginas=array; 
+       this.paginas=array;
+       toString();
        
     }
     
@@ -56,7 +57,14 @@ public class Paginacion {
             validar=0;
         }
     }
+
+    @Override
+    public String toString() {
+        return "Arraylist Generado \n" +  paginas ;
+    }
+
     public void OPT(){
+        int pos=0;
         int validar=0;
         char holder1=paginas.get(0);
         RAM.add(holder1);
@@ -66,12 +74,17 @@ public class Paginacion {
             for (int y=0;y<RAM.size();y++){
                 if (holder==RAM.get(y)){
                     validar=1;
+                    pos=y;
+                    
                 }
             }
             if (validar==1){
+                while(pos<RAM.size()){
+                    pos++;
+                }
                 System.out.println("Acceso a página tal");
-                
                 cache_hit++;
+                
             }
             else{
                 if (cache_miss>frames){
@@ -86,7 +99,9 @@ public class Paginacion {
                 }
             }
             validar=0;
-        }   
+        }
+        System.out.println("CACHE HIT: "+cache_hit);
+        System.out.println("CACHE MISS: "+cache_miss);
         
     }
 
